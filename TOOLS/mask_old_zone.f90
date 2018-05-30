@@ -1,5 +1,27 @@
 PROGRAM mask_old_zone
+  !!======================================================================
+  !!                     ***  PROGRAM  mask_old_zone  ***
+  !!=====================================================================
+  !!  ** Purpose : modify the coast-line of a newly produced bathymetry
+  !!               by create_bathy.exe (Nesting Tools), by applying a mask 
+  !!               of an already existing bathymetry in a subdomain.
+  !!           Example: set the NATL60 coast-line in eNATL60.
+  !!
+  !!  ** Method  : Position of subdomain is hard coded via the coordinates of
+  !!               the corners. All sea points of the old bathymetry are kept.
+  !!               In case of a dry new point correponding to a wet old point,
+  !!               bathymetry is set to rdepmin ( hardcoded to 3m here).
+  !!
+  !! History :  1.0  : 05/2018  : J.M. Molines : 
+  !!----------------------------------------------------------------------
+  !!----------------------------------------------------------------------
+  !!   routines      : description
+  !!----------------------------------------------------------------------
+
   USE netcdf
+  !!----------------------------------------------------------------------
+  !!  eNATL60 Tools .
+  !!----------------------------------------------------------------------
   IMPLICIT NONE
   INTEGER :: ji,jj
   INTEGER :: npiglo, npjglo, nx, ny, nrim
