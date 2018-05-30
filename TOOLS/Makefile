@@ -2,10 +2,10 @@
 
 include make.macro
 
-ALL: mask_old_zone.exe
+ALL: bat_mask_old_zone.exe
 
-mask_old_zone.exe: mask_old_zone.f90
-	$(F90) $(FFLAGS) mask_old_zone.f90 -o  mask_old_zone.exe
+bat_mask_old_zone.exe: bat_mask_old_zone.f90
+	$(F90) $(FFLAGS) bat_mask_old_zone.f90 -o  bat_mask_old_zone.exe
 
 clean:
 	\rm -f *~ *.exe
