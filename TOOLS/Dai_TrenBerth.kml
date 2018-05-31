@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-        <name>test.kml</name>
+        <name>RiverRunoff.kml</name>
         <Style id="s_ylw-pushpin">
                 <IconStyle>
                         <scale>1.1</scale>
@@ -247,7 +247,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Bénoué         </name>
+                <name>Benoué         </name>
                 <description>          52         10.6034689     km3 per yr   Garouadono Cameroon    </description>
                 <LookAt>
                         <longitude>   7.25000000     </longitude>
@@ -608,7 +608,7 @@
         </Placemark>
         <Placemark>
                 <name>Vistula (Wisla)</name>
-                <description>          94         32.8710747     km3 per yr   Tczew Poland      i</description>
+                <description>          94         32.8710747     km3 per yr   Tczew Poland      </description>
                 <LookAt>
                         <longitude>   18.7500000     </longitude>
                         <latitude>   54.2500000     </latitude>
@@ -913,7 +913,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Glomma (Gläma )</name>
+                <name>Glomma (Gloma )</name>
                 <description>         137         21.2111530     km3 per yr   Langnes So Norway      </description>
                 <LookAt>
                         <longitude>   11.2500000     </longitude>
@@ -1094,7 +1094,7 @@
         </Placemark>
         <Placemark>
                 <name>Gota           </name>
-                <description>         152         16.5052223     km3 per yr   Vänern Sweden      </description>
+                <description>         152         16.5052223     km3 per yr   Vonern Sweden      </description>
                 <LookAt>
                         <longitude>   11.7500000     </longitude>
                         <latitude>   57.7500000     </latitude>
@@ -1165,7 +1165,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Pánuco         </name>
+                <name>Penuco         </name>
                 <description>         160         13.6139717     km3 per yr   Las Adjunta Mexico      </description>
                 <LookAt>
                         <longitude>  -98.2500000     </longitude>
@@ -1309,7 +1309,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Ouémé          </name>
+                <name>Ouemé          </name>
                 <description>         183         5.44342375     km3 per yr   Bonou Benin       i</description>
                 <LookAt>
                         <longitude>   2.25000000     </longitude>
@@ -1417,7 +1417,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Baleine (R à la</name>
+                <name>Baleine (R a la</name>
                 <description>         202         15.9753761     km3 per yr   pres de leii</description>
                 <LookAt>
                         <longitude>  -67.5800018     </longitude>
@@ -1544,7 +1544,7 @@
         </Placemark>
         <Placemark>
                 <name>Coatzacoalcos  </name>
-                <description>         225         13.0405207     km3 per yr   Las Perlas ff</description>
+                <description>         225         13.0405207     km3 per yr   Las Perlas ff </description>
                 <LookAt>
                         <longitude>  -94.8700027     </longitude>
                         <latitude>   17.4300003     </latitude>
@@ -1652,7 +1652,7 @@
         </Placemark>
         <Placemark>
                 <name>Angerman       </name>
-                <description>         236         12.9345093     km3 per yr   Solleftea  </description>
+                <description>         236         12.9345093     km3 per yr   Solleftea  </description>
                 <LookAt>
                         <longitude>   17.2700005     </longitude>
                         <latitude>   63.1699982     </latitude>
@@ -1814,7 +1814,7 @@
         </Placemark>
         <Placemark>
                 <name>Drini          </name>
-                <description>         250         10.0491238     km3 per yr   Vau i DejesB0</description>
+                <description>         250         10.0491238     km3 per yr   Vau i DejesB0</description>
                 <LookAt>
                         <longitude>   19.6200008     </longitude>
                         <latitude>   42.0099983     </latitude>
@@ -1904,7 +1904,7 @@
         </Placemark>
         <Placemark>
                 <name>Pearl          </name>
-                <description>         265         9.08578396     km3 per yr   Bogalusa L44</description>
+                <description>         265         9.08578396     km3 per yr   Bogalusa L4</description>
                 <LookAt>
                         <longitude>  -89.8199997     </longitude>
                         <latitude>   30.7900009     </latitude>
@@ -1922,7 +1922,7 @@
         </Placemark>
         <Placemark>
                 <name>Pascagoula     </name>
-                <description>         266         9.02808571     km3 per yr   Merrill MSf”z</description>
+                <description>         266         9.02808571     km3 per yr   Merrill MSfz</description>
                 <LookAt>
                         <longitude>  -88.7200012     </longitude>
                         <latitude>   30.9799995     </latitude>
@@ -2048,7 +2048,7 @@
         </Placemark>
         <Placemark>
                 <name>Sabine         </name>
-                <description>         288         7.53956413     km3 per yr   Ruliff TX Ùff</description>
+                <description>         288         7.53956413     km3 per yr   Ruliff TX </description>
                 <LookAt>
                         <longitude>  -93.7399979     </longitude>
                         <latitude>   30.2999992     </latitude>
@@ -2263,7 +2263,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Jökulsá á Fjöll</name>
+                <name>Jokuls  Fjoll</name>
                 <description>         313         6.00898600     km3 per yr   Dettifoss i</description>
                 <LookAt>
                         <longitude>  -16.4200001     </longitude>
@@ -2732,7 +2732,7 @@
         </Placemark>
         <Placemark>
                 <name>Mono           </name>
-                <description>         399         3.47022581     km3 per yr   Athiémé    ii</description>
+                <description>         399         3.47022581     km3 per yr   Athim    ii</description>
                 <LookAt>
                         <longitude>   1.58000004     </longitude>
                         <latitude>   6.90999985     </latitude>
@@ -2947,7 +2947,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Santa María    </name>
+                <name>Santa Maria    </name>
                 <description>         427         2.75315428     km3 per yr   San Francisii</description>
                 <LookAt>
                         <longitude>  -80.9800034     </longitude>
@@ -3127,7 +3127,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Grande de Tárco</name>
+                <name>Grande de Torco</name>
                 <description>         442         2.54120445     km3 per yr   Balsa      ii</description>
                 <LookAt>
                         <longitude>  -84.3799973     </longitude>
@@ -3397,7 +3397,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Chiriquí Viejo </name>
+                <name>Chirique Viejo </name>
                 <description>         482         1.98954761     km3 per yr   Paso Canoa ii</description>
                 <LookAt>
                         <longitude>  -82.8300018     </longitude>
@@ -3649,7 +3649,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Pyarnu (Pärnu) </name>
+                <name>Pyarnu (Pernu) </name>
                 <description>         526         1.50574648     km3 per yr   Oorekula Oii</description>
                 <LookAt>
                         <longitude>   24.7700005     </longitude>
@@ -3703,7 +3703,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Kyrön          </name>
+                <name>Kyron          </name>
                 <description>         539         1.36960793     km3 per yr   Skatila Laii</description>
                 <LookAt>
                         <longitude>   21.8500004     </longitude>
@@ -3902,7 +3902,7 @@
         </Placemark>
         <Placemark>
                 <name>Siika          </name>
-                <description>         561         1.22960031     km3 per yr   Länkelä    i</description>
+                <description>         561         1.22960031     km3 per yr   Lunkele    i</description>
                 <LookAt>
                         <longitude>   24.8700008     </longitude>
                         <latitude>   64.7600021     </latitude>
@@ -4028,7 +4028,7 @@
         </Placemark>
         <Placemark>
                 <name>Shkumbini [Medh</name>
-                <description>         588         1.09905910     km3 per yr   Papër      ii</description>
+                <description>         588         1.09905910     km3 per yr   Paper      ii</description>
                 <LookAt>
                         <longitude>   19.9699993     </longitude>
                         <latitude>   41.0600014     </latitude>
@@ -4190,7 +4190,7 @@
         </Placemark>
         <Placemark>
                 <name>Gidealven      </name>
-                <description>         614        0.994102120     km3 per yr   Björna     ii</description>
+                <description>         614        0.994102120     km3 per yr   Bjorna     ii</description>
                 <LookAt>
                         <longitude>   18.5900002     </longitude>
                         <latitude>   63.5600014     </latitude>
@@ -4514,7 +4514,7 @@
         </Placemark>
         <Placemark>
                 <name>Kobbelv        </name>
-                <description>         660        0.783684552     km3 per yr   Kobbvatn   ÏI”</description>
+                <description>         660        0.783684552     km3 per yr   Kobbvatn   </description>
                 <LookAt>
                         <longitude>   16.0000000     </longitude>
                         <latitude>   67.5999985     </latitude>
@@ -4532,7 +4532,7 @@
         </Placemark>
         <Placemark>
                 <name>Mati           </name>
-                <description>         661        0.788606226     km3 per yr   Shoshaj    zöÅ</description>
+                <description>         661        0.788606226     km3 per yr   Shoshaj    Å</description>
                 <LookAt>
                         <longitude>   20.0200005     </longitude>
                         <latitude>   41.6199989     </latitude>
@@ -4568,7 +4568,7 @@
         </Placemark>
         <Placemark>
                 <name>Kazari (Kasari)</name>
-                <description>         663        0.780110180     km3 per yr   Kazari Kasj“Ja£4 </description>
+                <description>         663        0.780110180     km3 per yr   Kazari Kasj4 </description>
                 <LookAt>
                         <longitude>   24.0000000     </longitude>
                         <latitude>   58.7299995     </latitude>
@@ -4586,7 +4586,7 @@
         </Placemark>
         <Placemark>
                 <name>Yaque del Sur  </name>
-                <description>         664        0.759482622     km3 per yr   El Puente  ¸i</description>
+                <description>         664        0.759482622     km3 per yr   El Puente </description>
                 <LookAt>
                         <longitude>  -71.0699997     </longitude>
                         <latitude>   18.6800003     </latitude>
@@ -5971,7 +5971,7 @@
                 </Point>
         </Placemark>
         <Placemark>
-                <name>Yagala (Jägala)</name>
+                <name>Yagala (Jagala)</name>
                 <description>         852        0.224734351     km3 per yr   Kekhra Kehii</description>
                 <LookAt>
                         <longitude>   25.3299999     </longitude>
@@ -6242,7 +6242,7 @@
         </Placemark>
         <Placemark>
                 <name>Kunda          </name>
-                <description>         884        0.132134899     km3 per yr   Syami Sämiii</description>
+                <description>         884        0.132134899     km3 per yr   Syami Somiii</description>
                 <LookAt>
                         <longitude>   26.5799999     </longitude>
                         <latitude>   59.3699989     </latitude>
