@@ -37,7 +37,7 @@ PROGRAM data_extend_zone
   CHARACTER(LEN=80) :: cldum
   !!------------------------------------------------------------------------
   !! initialize default corner values
-  iimin=1053 ; iimax=6474
+  iimin=987  ; iimax=6408
   ijmin=1276 ; ijmax=4729
   narg = iargc()
 
