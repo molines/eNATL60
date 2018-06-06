@@ -80,7 +80,7 @@ PROGRAM data_extend_zone
         ;            ; CALL getarg(ijarg, cldum  )   ; ijarg=ijarg+1 ; READ(cldum,*) iimax
         ;            ; CALL getarg(ijarg, cldum  )   ; ijarg=ijarg+1 ; READ(cldum,*) ijmin
         ;            ; CALL getarg(ijarg, cldum  )   ; ijarg=ijarg+1 ; READ(cldum,*) ijmax
-     CASE ( '-o'   ) ; CALL getarg(ijarg, cf_out )   
+     CASE ( '-o'   ) ; CALL getarg(ijarg, cf_out )   ; ijarg=ijarg+1
      CASE DEFAULT    ; PRINT *, ' ERROR : ', TRIM(cldum),' : unknown option.'; STOP 1
      END SELECT
   ENDDO
