@@ -66,6 +66,9 @@ PROGRAM rnf_reader
    ! eNATL60
    REAL(KIND=4) :: rlonmin = -100 , rlonmax = 50     ! define window for current model
    REAL(KIND=4) :: rlatmin =    6 , rlatmax = 70     !  
+   ! global
+!  REAL(KIND=4) :: rlonmin = -180 , rlonmax = 180     ! define window for current model
+!  REAL(KIND=4) :: rlatmin =    -90 , rlatmax = 90     !  
    REAL(KIND=4) :: spval                             ! fill value for flow
    REAL(KIND=4) :: zv                                ! current value
 
