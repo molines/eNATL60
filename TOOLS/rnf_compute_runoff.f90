@@ -8,6 +8,7 @@ PROGRAM rnf_compute_area
   !!           
   !!
   !! History : 1.0  : 11/2014  : J.M. Molines : Original code
+  !!                  06/2018  : J.M. Molines : adaption for eNatl60
   !!----------------------------------------------------------------------
   !!----------------------------------------------------------------------
   !!   routines      : description
@@ -119,7 +120,8 @@ PROGRAM rnf_compute_area
         WHERE ( itmsk == js ) itmp = 1
         darea = SUM( e1t *e2t, (itmp == 1) )
         ! compute runoff ( taking into account some particular case ( St Lawrence, Ottawa, Saguenay for instance)
-        IF ( js == 16 ) THEN  ! St laurent
+        SELECT CASE ( js )
+        CASE ( 16 ) !  ( St Lawrence, Ottawa, Saguenay Ottawa St Maurice Outardes Manicuagan )
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &
                 &    runoff( 59)%vol_stn * runoff( 59)%ratio_m2s + &   !  Ottawa
                 &    runoff(130)%vol_stn * runoff(130)%ratio_m2s + &   !  St Maurice
@@ -133,7 +135,39 @@ PROGRAM rnf_compute_area
                 &            runoff(230)%monthly_flow(:) * runoff(230)%ratio_m2s + &   !  Outardes
                 &            runoff(101)%monthly_flow(:) * runoff(101)%ratio_m2s       !  Manicuagan
            runoff( js)%ratio_m2s = 1.  
-        ENDIF
+        CASE ( 29 ) ! Esequibo Cuyuni
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Esequibo
+                &    runoff( 93)%vol_stn * runoff( 93)%ratio_m2s                !  Cuyuni
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + &
+                &    runoff( 93)%monthly_flow(:) * runoff( 93)%ratio_m2s        !  Cuyuni
+           runoff( js)%ratio_m2s = 1.
+        CASE ( 43 ) !  Usumasinta, Grivalva, Rapido de Sama
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Usumasinta (MX)
+                &    runoff(133)%vol_stn * runoff(133)%ratio_m2s            + & ! Rapido de Sama
+                &    runoff(201)%vol_stn * runoff(201)%ratio_m2s                ! Grivalva
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Usumasinta (MX)
+                &    runoff(133)%monthly_flow(:) * runoff(133)%ratio_m2s    +&  ! Rapido de Sama
+                &    runoff(201)%monthly_flow(:) * runoff(201)%ratio_m2s        ! Grivalva
+           runoff( js)%ratio_m2s = 1.
+        CASE ( 67)  !  Alabama + Tombigbee
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Alabama
+                &    runoff(123)%vol_stn * runoff(123)%ratio_m2s                ! Tombigbee
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & !Alabama
+                &    runoff(123)%monthly_flow(:) * runoff(123)%ratio_m2s        ! Tombigbee
+           runoff( js)%ratio_m2s = 1.
+        CASE (288)  ! Sabines + Noches
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Sabines
+                &    runoff(317)%vol_stn * runoff(317)%ratio_m2s                ! Noches
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Sabines
+                &    runoff(317)%monthly_flow(:) * runoff(317)%ratio_m2s        ! Noches
+           runoff( js)%ratio_m2s = 1.
+        CASE (432 ) ! Ouergha + Sehou
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Ouergah
+                &    runoff(498)%vol_stn * runoff(498)%ratio_m2s                ! Sehou
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Ouergha
+                &    runoff(498)%monthly_flow(:) * runoff(498)%ratio_m2s        ! Sehou
+           runoff( js)%ratio_m2s = 1.
+        END SELECT
         PRINT *, js, np , darea/1.e6, 'km^2', runoff(js)%vol_stn * runoff(js)%ratio_m2s/darea * dconvcoef*dconv2mm, TRIM(runoff(js)%riv_name), SUM(runoff(js)%monthly_flow(:))/12.*runoff(js)%ratio_m2s/darea*1000.*86400. ! mm/day
 
         DO jm=1,12
