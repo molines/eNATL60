@@ -1,6 +1,6 @@
-PROGRAM rnf_compute_area
+PROGRAM rnf_compute_runoff
   !!======================================================================
-  !!                     ***  PROGRAM  rnf_compute_area  ***
+  !!                     ***  PROGRAM  rnf_compute_runoff  ***
   !!=====================================================================
   !!  ** Purpose : Compute monthly runoff file from Dai Trenberth data base
   !!
@@ -332,4 +332,4 @@ CONTAINS
     ENDDO
 
   END SUBROUTINE GetDaiTrenberth
-END PROGRAM rnf_compute_area
+END PROGRAM rnf_compute_runoff
