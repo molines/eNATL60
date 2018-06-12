@@ -83,8 +83,6 @@ PROGRAM rnf_compute_runoff
   ierr = NF90_INQ_VARID( ncid, cv_e2t, id ) ; ierr = NF90_GET_VAR(ncid, id, e2t,  start=(/1,1,1/) )
   ierr = NF90_INQ_VARID( ncid, cv_gla, id ) ; ierr = NF90_GET_VAR(ncid, id, rlon, start=(/1,1,1/) )
   ierr = NF90_INQ_VARID( ncid, cv_gph, id ) ; ierr = NF90_GET_VAR(ncid, id, rlat, start=(/1,1,1/) )
-  PRINT * ,e1t( 500,500), e2t( 500,500)
-  PRINT * ,e1t( 1000,1000), e2t( 1000,1000)
 
   ierr = NF90_CLOSE(ncid) 
 
@@ -113,6 +111,7 @@ PROGRAM rnf_compute_runoff
   itmsk=0
   WHERE ( irivmsk > 1 ) itmsk = irivmsk
   WHERE ( irivmsk > 1 ) socoefr=0.5
+  PRINT *, 'Station  Npts     Area       mm/d(y)  River         mm/d (month)'
   DO js = 1, npstn
      np = COUNT ( (itmsk == js ) )
      IF ( np /= 0 ) THEN
@@ -168,7 +167,10 @@ PROGRAM rnf_compute_runoff
                 &    runoff(498)%monthly_flow(:) * runoff(498)%ratio_m2s        ! Sehou
            runoff( js)%ratio_m2s = 1.
         END SELECT
-        PRINT *, js, np , darea/1.e6, 'km^2', runoff(js)%vol_stn * runoff(js)%ratio_m2s/darea * dconvcoef*dconv2mm, TRIM(runoff(js)%riv_name), SUM(runoff(js)%monthly_flow(:))/12.*runoff(js)%ratio_m2s/darea*1000.*86400. ! mm/day
+!        PRINT *, js, np , darea/1.e6, 'km^2', runoff(js)%vol_stn * runoff(js)%ratio_m2s/darea * dconvcoef*dconv2mm, TRIM(runoff(js)%riv_name), SUM(runoff(js)%monthly_flow(:))/12.*runoff(js)%ratio_m2s/darea*1000.*86400. ! mm/day
+        PRINT 777 ,  js, np , darea/1.e6, 'km^2', runoff(js)%vol_stn * runoff(js)%ratio_m2s/darea * dconvcoef*dconv2mm, &
+                     TRIM(runoff(js)%riv_name), SUM(runoff(js)%monthly_flow(:))/12.*runoff(js)%ratio_m2s/darea*1000.*86400. ! mm/day
+777 FORMAT(i5,i8, f10.2,x,a,f8.2,x,a, f8.2)
 
         DO jm=1,12
            sorunoff(:,:,jm) = sorunoff(:,:,jm) + itmp(:,:)*runoff(js)%monthly_flow(jm)*runoff(js)%ratio_m2s/darea*1000.
