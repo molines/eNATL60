@@ -113,3 +113,23 @@ In this document we present the procedure used for producing the runoff file.
      - coastal-stns-Vol-monthly.updated-Aug2014.nc for data file
      - coordinates.nc 
    * see the code for details and eventual changes !
+   * This procedure produce a runoff.nc file and a screen display of the list of the rivers used in the file. In particular, on the screen output you have access to the runoff value (in mm/day, annual mean) used on each model cell for the rivers (last column): If values are in excess of 150 mm/day, we come back to rivermouth editing in order to better spread the runoff for faulty rivers.
+   
+> Station  Npts     Area       mm/d(y)  River         mm/d (month)
+    3    8413  28136.99 km^2  109.49 Orinoco          109.79
+    6   11617  29649.72 km^2   56.50 Mississippi       56.51
+   16    8234  11200.08 km^2  132.14 St Lawrence      131.77
+   22    2064   6819.86 km^2   92.76 Magdalena         90.33
+   26    9378  12170.15 km^2   45.87 Danube            45.83
+   29    1813   6129.77 km^2   82.22 Essequibo         82.16
+   43    2195   6768.93 km^2   45.00 Usumacinta        45.79
+   45    1073   1441.84 km^2  137.55 Rhine            137.46
+   47    1954   1750.63 km^2  107.84 Caniapiscau      107.77
+   ...
+  591      55     91.99 km^2   32.40 Pescara           32.38
+  596      50     55.30 km^2   53.88 Viskan            53.84
+  598      68    170.13 km^2   16.80 Calcasieu River   16.79
+  606     901   1162.01 km^2    2.41 Vecht              2.40
+  608      30     90.52 km^2   30.41 Toa               30.39
+
+
