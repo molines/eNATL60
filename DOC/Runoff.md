@@ -11,7 +11,7 @@ In this document we present the procedure used for producing the runoff file.
    * we use the last update of the monthly dataset (coastal-stns-Vol-monthly.updated-Aug2014.nc)
 
 ## Required software :
- 1. [BIMGTOOLS](http://archimer.ifremer.fr/doc/00195/30646/) for editing the rivermouth file
+ 1. [BMGTOOLS](http://archimer.ifremer.fr/doc/00195/30646/) for editing the rivermouth file
  1. rnf_xxx tools available in this repository, under TOOLS directory. A Makefile is provided to compile the various fortran programs.
  1. Google Earth highly recommended  in order to acurately locate the rivermouths.
 
