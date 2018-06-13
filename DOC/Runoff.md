@@ -57,7 +57,7 @@ In this document we present the procedure used for producing the runoff file.
  * Note that BMGTOOLS requires that the variable we are working with is named Bathymetry.
  * For big configuration, it is much easier to work with BMGTOOLS with subdomains. The program [splitfile2](https://github.com/molines/JMMTOOLS/blob/master/TOOLS/splitfile2.f90) can be used to explose the full domain into subdomain and then to merge the subdomain back to full domain. You need to explose both coordinates and data file in the same way :
 
->   usage :  splitfile -f IN-file  [-s  x-size y-size] [-n i-size j-size] [-M ] 
+ >  usage :  splitfile -f IN-file  [-s  x-size y-size] [-n i-size j-size] [-M ] 
        
       PURPOSE :
         This program can be used either for spliting an input file into smaller
@@ -102,4 +102,14 @@ In this document we present the procedure used for producing the runoff file.
       SEE ALSO :
        BMGTOOLS
  
- * With BMGTOOLS define the zone where to apply the runoff for each river, with the help of google-eart images, to better locate the rivermouth.
+ * With BMGTOOLS define the zone where to apply the runoff for each river, with the help of google-earth images, to better locate the rivermouth.
+
+ * This procedure may take a lot of time, but make you visit the world !
+ 
+ ### Compute the river runoff
+  * This is done with [rnf_compute_runoff](../TOOLS/rnf_compute_runoff.f90) program.
+   * in its actual shape, the program assume hard coded name for files :
+     - rivermouth.nc
+     - coastal-stns-Vol-monthly.updated-Aug2014.nc for data file
+     - coordinates.nc 
+   * see the code for details and eventual changes !
