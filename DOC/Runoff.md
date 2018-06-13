@@ -131,3 +131,7 @@ In this document we present the procedure used for producing the runoff file.
   598      68    170.13 km^2   16.80 Calcasieu River   16.79
   606     901   1162.01 km^2    2.41 Vecht              2.40
   608      30     90.52 km^2   30.41 Toa               30.39 
+```
+
+* In the iterative process it is recommended to rename the different modified files with a clear version number.
+  * for eNATL60 we end up with eNATL60_runoff_3.1.3.nc file. Rev 3 refer to the domain of the simulation. Rev 3.1 refer to modifications of the bathymetry on the same domain. rev 3.1.3 is the third iteration of the runoff corresponding to 3.1 bathymetric file.
