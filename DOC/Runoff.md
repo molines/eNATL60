@@ -1,14 +1,14 @@
 # Preparing runoff file for eNATL60
-  In this simulation, we still emulate the river runoff as a precipitation spread over the rivermouth. This procedure requires to have a 2D file with 2 variables: (1) **sorunoff**  giving the amount of 'precip' (kg/m2/s) to add at the rivermouth. This sorunoff variable is in general a monthly climatology.(2)  **socoefr** representing the rivermouths and used as a mask field for specific actions such as, for example, shutting off the SSS restoring on the rivermouth. For historical reason this socoefr variable has values between 0 and 0.5 (In fact either 0 or 0.5).
+  In this simulation, we still emulate the river runoff as a precipitation spread over the rivermouth. This procedure requires to have a 2D file with 2 variables: (1) **sorunoff**  giving the amount of 'precip' (kg/m2/s) to add at the rivermouth. This sorunoff variable is in general a monthly climatology. (2)  **socoefr** representing the rivermouths and used as a mask field for specific actions such as, for example, shutting off the SSS restoring on the rivermouth. For historical reason this socoefr variable has values between 0 and 0.5 (In fact either 0 or 0.5).
 
 In this document we present the procedure used for producing the runoff file.
 
 ## Required information :
- 1. Coordinate file for the domain
+ 1. Coordinates file for the domain
  1. Surface mask file.
  1. Bathymetry file of the domain (finaly used as a mask)
  1. [Dai and Trenberth dataset](http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/)
-   * we use the last update of the monthly dataset (coastal-stns-Vol-monthly.updated-Aug2014.nc)
+    * we use the last update of the monthly dataset (coastal-stns-Vol-monthly.updated-Aug2014.nc)
 
 ## Required software :
  1. [BMGTOOLS](http://archimer.ifremer.fr/doc/00195/30646/) for editing the rivermouth file
@@ -46,16 +46,16 @@ In this document we present the procedure used for producing the runoff file.
         netcdf file : none
           variables : Bathymetry !
 
- * Do it with the rivermouth file used for NATL60. If you do not have this original file, then start from scratch and initialize rivermouth to surface *tmask*
+ * Do it with the rivermouth file used for NATL60. If you do not have this original file, then start from scratch and initialize rivermouth to surface *tmask*.
 
-### Prepare kml file with position of Dai-Trenberth river station 
- * This can be done using the bash script [rnf_mk_kml.ksh](../TOOLS/rnf_mk_kml.ksh). The resulting kml file requires some hand editing because of some garbage characters comming from the netcdf Dai and Trenberth netcdf file. 
- * Then in GOOGLE-EARTH you can open this kml file and you will have the Dai-Trenberth station appearing as pin points. This will be very usefull for next step.
+### Prepare kml file with position of Dai-Trenberth river stations
+ * This can be done using the bash script [rnf_mk_kml.ksh](../TOOLS/rnf_mk_kml.ksh). The resulting kml file requires some hand editing because of some garbage characters coming from the Dai and Trenberth netcdf file. 
+ * Then in GOOGLE-EARTH you can open this kml file and you will have the Dai-Trenberth stations appearing as pin points. This will be very usefull for next step.
  
 ### Build the rivermouth file using BMGTOOLS.
  * Note that BMGTOOLS requires that the coordinate file has a time axis.
  * Note that BMGTOOLS requires that the variable we are working with is named Bathymetry.
- * For big configuration, it is much easier to work with BMGTOOLS with subdomains. The program [splitfile2](https://github.com/molines/JMMTOOLS/blob/master/TOOLS/splitfile2.f90) can be used to explose the full domain into subdomain and then to merge the subdomain back to full domain. You need to explose both coordinates and data file in the same way :
+ * For big configuration, it is much easier to work with BMGTOOLS with subdomains. The program [splitfile2](https://github.com/molines/JMMTOOLS/blob/master/TOOLS/splitfile2.f90) can be used to explode the full domain into subdomains and then to merge the subdomains back to full domain. You need to explode both coordinates and data file in the same way :
 
  >  usage :  splitfile -f IN-file  [-s  x-size y-size] [-n i-size j-size] [-M ] 
        
@@ -104,10 +104,10 @@ In this document we present the procedure used for producing the runoff file.
  
  * With BMGTOOLS define the zone where to apply the runoff for each river, with the help of google-earth images, to better locate the rivermouth.
 
- * This procedure may take a lot of time, but make you visit the world !
+ * This procedure may take a lot of time, but makes you visit the world !
  
  ### Mask the resulting rivermouth file.
-  * When building the rivermouth file with BMGTOOLS, we do not case about the coastline. So it is mandatory to mask the resulting file in order to keep only ocean points in the file. Otherwise an error will be done when computing the runoff amount on model cells.
+  * When building the rivermouth file with BMGTOOLS, we do not take care of the coastline. So it is mandatory to mask the resulting file in order to keep only ocean points in the file. Otherwise an error will be done when computing the runoff amount on model cells.
   * This is done with [rnf_mask](../TOOLS/rnd_mask.f90) program, using the bathymetric file.
   
   >   usage :  rnf_mask -d DATA-file -b BATHY-file [-vd VAR-data] [-vb VAR-bathy]
@@ -139,7 +139,7 @@ In this document we present the procedure used for producing the runoff file.
      - coastal-stns-Vol-monthly.updated-Aug2014.nc for data file
      - coordinates.nc 
    * see the code for details and eventual changes !
-   * This procedure produce a runoff.nc file and a screen display of the list of the rivers used in the file. In particular, on the screen output you have access to the runoff value (in mm/day, annual mean) used on each model cell for the rivers (last column): If values are in excess of 150 mm/day, we come back to rivermouth editing in order to better spread the runoff for faulty rivers.
+   * This procedure produces a runoff.nc file and a screen display of the list of the rivers used in the file. In particular, on the screen output you have access to the runoff value (in mm/day, annual mean) used on each model cell for the rivers (last column): If values are in excess of 150 mm/day, we come back to rivermouth editing in order to better spread the runoff for faulty rivers.
    
 ``` Station  Npts     Area       mm/d(y)  River         mm/d (month)
     3    8413  28136.99 km^2  109.49 Orinoco          109.79
