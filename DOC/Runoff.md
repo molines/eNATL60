@@ -23,7 +23,7 @@ In this document we present the procedure used for producing the runoff file.
 
 ## Roadmap :
 ### Extending previous rivermouth field (used in NATL60)
- * With NATL60 data file and eNATL60 bathymetry, this is done with the program [data_extend_zone](TOOLS/data_extend_zone.f90)
+ * With NATL60 data file and eNATL60 bathymetry, this is done with the program [data_extend_zone](../TOOLS/data_extend_zone.f90)
 
 > usage :  data_extend_zone -b BATHY-new -d DATA-old -v VAR-old ...
            [-o FILE-out] [-w imin imax jmin jmax ]
