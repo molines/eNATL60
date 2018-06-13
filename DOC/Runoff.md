@@ -55,7 +55,7 @@ In this document we present the procedure used for producing the runoff file.
 ### Build the rivermouth file using BMGTOOLS.
  * Note that BMGTOOLS requires that the coordinate file has a time axis.
  * Note that BMGTOOLS requires that the variable we are working with is named Bathymetry.
- * For big configuration, it is much easier to work with BMGTOOLS with subdomains. The program [splitfile2](https://github.com/molines/JMMTOOLS/TOOLS/splitfile2.f90) can be used to explose the full domain into subdomain and then to merge the subdomain back to full domain. You need to explose both coordinates and data file in the same way :
+ * For big configuration, it is much easier to work with BMGTOOLS with subdomains. The program [splitfile2](https://github.com/molines/JMMTOOLS/blob/master/TOOLS/splitfile2.f90) can be used to explose the full domain into subdomain and then to merge the subdomain back to full domain. You need to explose both coordinates and data file in the same way :
 
 >   usage :  splitfile -f IN-file  [-s  x-size y-size] [-n i-size j-size] [-M ] 
        
