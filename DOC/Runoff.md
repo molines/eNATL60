@@ -106,6 +106,32 @@ In this document we present the procedure used for producing the runoff file.
 
  * This procedure may take a lot of time, but make you visit the world !
  
+ ### Mask the resulting rivermouth file.
+  * When building the rivermouth file with BMGTOOLS, we do not case about the coastline. So it is mandatory to mask the resulting file in order to keep only ocean points in the file. Otherwise an error will be done when computing the runoff amount on model cells.
+  * This is done with [rnf_mask](../TOOLS/rnd_mask.f90) program, using the bathymetric file.
+  
+  >   usage :  rnf_mask -d DATA-file -b BATHY-file [-vd VAR-data] [-vb VAR-bathy]
+           [-o FILE-out] 
+       
+      PURPOSE :
+         Create masked copy of the input data file
+       
+      ARGUMENTS :
+        -d DATA-file  : give the name of the data file
+        -b BATHY-file : give the name of the bathymetry 
+       
+      OPTIONS :
+        -vd VAR-data  : give the name of the variable in data file
+             default is Bathymetry
+        -vb VAR-bathy  : give the name of the variable in bathymetry file
+             default is Bathymetry
+        -o FILE-out: specify name of output file, instead of <BATHY-new>.wrk
+       
+       
+      OUTPUT : 
+        netcdf file : <DATA-file>.wrk or  <FILE-OUT> 
+          variables : Bathymetry or VAR-data if specified
+
  ### Compute the river runoff
   * This is done with [rnf_compute_runoff](../TOOLS/rnf_compute_runoff.f90) program.
    * in its actual shape, the program assume hard coded name for files :
