@@ -12,7 +12,7 @@ In this document we present the procedure used for producing the runoff file.
 
 ## Required software :
  1. [BIMGTOOLS](http://archimer.ifremer.fr/doc/00195/30646/) for editing the rivermouth file
- 1. rnf_xxx tools available in this repository.
+ 1. rnf_xxx tools available in this repository, under TOOLS directory. A Makefile is provided to compile the various fortran programs.
  1. Google Earth highly recommended  in order to acurately locate the rivermouths.
 
 ## General procedure:
@@ -44,10 +44,62 @@ In this document we present the procedure used for producing the runoff file.
     
       OUTPUT : 
         netcdf file : none
-          variables : Bathymetry !!
+          variables : Bathymetry !
 
  * Do it with the rivermouth file used for NATL60. If you do not have this original file, then start from scratch and initialize rivermouth to surface *tmask*
 
 ### Prepare kml file with position of Dai-Trenberth river station 
+ * This can be done using the bash script [rnf_mk_kml.ksh](../TOOLS/rnf_mk_kml.ksh). The resulting kml file requires some hand editing because of some garbage characters comming from the netcdf Dai and Trenberth netcdf file. 
+ * Then in GOOGLE-EARTH you can open this kml file and you will have the Dai-Trenberth station appearing as pin points. This will be very usefull for next step.
+ 
+### Build the rivermouth file using BMGTOOLS.
+ * Note that BMGTOOLS requires that the coordinate file has a time axis.
+ * Note that BMGTOOLS requires that the variable we are working with is named Bathymetry.
+ * For big configuration, it is much easier to work with BMGTOOLS with subdomains. The program [splitfile2](https://github.com/molines/JMMTOOLS/TOOLS/splitfile2.f90) can be used to explose the full domain into subdomain and then to merge the subdomain back to full domain. You need to explose both coordinates and data file in the same way :
 
-
+>   usage :  splitfile -f IN-file  [-s  x-size y-size] [-n i-size j-size] [-M ] 
+       
+      PURPOSE :
+        This program can be used either for spliting an input file into smaller
+        files, whose dimensions are specified, or to merge already splitted 
+        files.  The interest of this tool is linked with editing tools  such as
+        BMGTOOLS that cannot handle very big files. Each sub-file can then be 
+        edited easily and the whole file rebuildt after edition.
+            Splitted files have the same root name than the input files, with a
+        suffix indicating a rank number, from 1 to the total number of spliited
+        files, number 1 corresponding to the south-western most domain, last
+        number to the north-eastern most domain.
+             When using the merge option, the decomposition is read from the 
+        rank 1 file and rebuilt file have IN-file_merged name.
+        Split the input files into smaller files with dimensions x-size x y-size
+       
+      ARGUMENTS :
+         -f IN-file : specify the name of the file to split or merge.
+                      In case of merge, this is the root name without rank 
+                      number. (eg for files like config_0001.nc, just pass 
+                      config.)
+       
+      OPTIONS : 1 and only 1 option must be used.
+         -s x-size y-size : specify the size of the subdomain for splitting
+         -n i-size j-size : specify the number of subdomains in the I and J 
+                            direction.
+         -M :  merge splitted files. IN-file is the root name in this case.
+         -c coordinates file : use coordinate file to patch nav_lon,nav_lat
+              where there are land processors
+       
+      REQUIRED FILES :
+         none
+       
+      OUTPUT : 
+        netcdf files : 
+              -s or -n options ROOT_file_nnnn.nc where nnnn is a 4 digit number 
+                  indicating the rank of the subdomain. ROOT_file is the name
+                  of the input file without the extension.
+              -M option : IN_file_merg.nc
+           
+          variables : same than in IN-file
+       
+      SEE ALSO :
+       BMGTOOLS
+ 
+ * With BMGTOOLS define the zone where to apply the runoff for each river, with the help of google-eart images, to better locate the rivermouth.
