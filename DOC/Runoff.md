@@ -135,7 +135,7 @@ In this document we present the procedure used for producing the runoff file.
  ### Compute the river runoff
   * This is done with [rnf_compute_runoff](../TOOLS/rnf_compute_runoff.f90) program.
    * in its actual shape, the program assume hard coded name for files :
-     - rivermouth.nc
+     - river_mouth.nc
      - coastal-stns-Vol-monthly.updated-Aug2014.nc for data file
      - coordinates.nc 
    * see the code for details and eventual changes !
