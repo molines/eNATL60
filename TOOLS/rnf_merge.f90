@@ -24,9 +24,9 @@ PROGRAM rnf_merge
   IMPLICIT NONE
   INTEGER(KIND=4) :: ierr, ncid_old, ncid_new, id
   INTEGER(KIND=4) :: narg, ijarg
-  INTEGER(KIND=4) :: npiglo, npjglo
+  INTEGER(KIND=4) :: npiglo, npjglo, npt
 
-  REAL(KIND=4), DIMENSION(:,:), ALLOCATABLE :: runoff_old, runoff_new 
+  REAL(KIND=4), DIMENSION(:,:,:), ALLOCATABLE :: runoff_old, runoff_new 
 
   CHARACTER(LEN=80) :: cf_old
   CHARACTER(LEN=80) :: cf_new
@@ -91,13 +91,14 @@ PROGRAM rnf_merge
 
   ! Read dimension in cv_old
   ierr = NF90_OPEN(cf_old, NF90_NOWRITE, ncid_old )
-  ierr = NF90_INQ_DIMID(ncid_old,'x', id ) ; ierr = NF90_INQUIRE_DIMENSION(ncid_old,id,len=npiglo)
-  ierr = NF90_INQ_DIMID(ncid_old,'y', id ) ; ierr = NF90_INQUIRE_DIMENSION(ncid_old,id,len=npjglo)
+  ierr = NF90_INQ_DIMID(ncid_old,'x',            id ) ; ierr = NF90_INQUIRE_DIMENSION(ncid_old,id,len=npiglo)
+  ierr = NF90_INQ_DIMID(ncid_old,'y',            id ) ; ierr = NF90_INQUIRE_DIMENSION(ncid_old,id,len=npjglo)
+  ierr = NF90_INQ_DIMID(ncid_old,'time_counter', id ) ; ierr = NF90_INQUIRE_DIMENSION(ncid_old,id,len=npt)
   PRINT *,'  NPIGLO = ', npiglo
   PRINT *,'  NPJGLO = ', npjglo
 
   ! allocate arrays
-  ALLOCATE ( runoff_old(npiglo,npjglo) , runoff_new(npiglo,npjglo) )
+  ALLOCATE ( runoff_old(npiglo,npjglo,npt) , runoff_new(npiglo,npjglo,npt) )
 
   ierr = NF90_INQ_VARID(ncid_old,cv_old,id ) ; ierr = NF90_GET_VAR(ncid_old, id, runoff_old )
   ierr = NF90_CLOSE(ncid_old)
@@ -113,8 +114,8 @@ PROGRAM rnf_merge
   ! deal now with socoeff variable 
   ierr = NF90_INQ_VARID(ncid_new,'socoefr',id ) 
   runoff_old=0.
-  WHERE ( runoff_new /= 0. ) runoff_old=0.5
-  ierr = NF90_PUT_VAR(ncid_new, id, runoff_old )
+  WHERE ( runoff_new(:,:,1) /= 0. ) runoff_old(:,:,1)=0.5
+  ierr = NF90_PUT_VAR(ncid_new, id, runoff_old(:,:,1) )
 
   
   ierr = NF90_CLOSE(ncid_new) 
