@@ -38,7 +38,8 @@ PROGRAM rnf_compute_runoff
 
   CHARACTER(LEN=80) :: cf_coo ='coordinates.nc'
   CHARACTER(LEN=80) :: cf_riv ='river_mouth.nc'
-  CHARACTER(LEN=80) :: cf_in='coastal-stns-Vol-monthly.updated-oct2007.nc'
+!  CHARACTER(LEN=80) :: cf_in='coastal-stns-Vol-monthly.updated-oct2007.nc'
+  CHARACTER(LEN=80) :: cf_in='coastal-stns-Vol-monthly.updated-Aug2014.nc'
   CHARACTER(LEN=80) :: cf_out='runoff.nc'
   CHARACTER(LEN=80) :: cv_e1t = 'e1t'
   CHARACTER(LEN=80) :: cv_e2t = 'e2t'
