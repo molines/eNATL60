@@ -9,6 +9,7 @@ In this document we present the procedure used for producing the runoff file.
  1. Bathymetry file of the domain (finaly used as a mask)
  1. [Dai and Trenberth dataset](http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/)
     * we use the last update of the monthly dataset (coastal-stns-Vol-monthly.updated-Aug2014.nc)
+    * this file is available on __cal1__ at `/mnt/meom/DATA_SET/RUNOFF`
 
 ## Required software :
  1. [BMGTOOLS](http://archimer.ifremer.fr/doc/00195/30646/) for editing the rivermouth file
