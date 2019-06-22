@@ -64,8 +64,11 @@ PROGRAM rnf_reader
 !   REAL(KIND=4) :: rlonmin = -82 , rlonmax = 9.375   ! define window for current model
 !   REAL(KIND=4) :: rlatmin =  25 , rlatmax = 66      !  
    ! eNATL60
-   REAL(KIND=4) :: rlonmin = -100 , rlonmax = 50     ! define window for current model
-   REAL(KIND=4) :: rlatmin =    6 , rlatmax = 70     !  
+!  REAL(KIND=4) :: rlonmin = -100 , rlonmax = 50     ! define window for current model
+!  REAL(KIND=4) :: rlatmin =    6 , rlatmax = 70     !  
+   ! eNATL36X
+   REAL(KIND=4) :: rlonmin = -110 , rlonmax = 50     ! define window for current model
+   REAL(KIND=4) :: rlatmin =   -15 , rlatmax = 80     !  
    ! global
 !  REAL(KIND=4) :: rlonmin = -180 , rlonmax = 180     ! define window for current model
 !  REAL(KIND=4) :: rlatmin =    -90 , rlatmax = 90     !  
@@ -74,7 +77,8 @@ PROGRAM rnf_reader
 
    REAL(KIND=8), DIMENSION(12) :: dsum
 
-   CHARACTER(LEN=80)                            :: cf_in='coastal-stns-Vol-monthly.updated-oct2007.nc'
+!  CHARACTER(LEN=80)                            :: cf_in='coastal-stns-Vol-monthly.updated-oct2007.nc'
+   CHARACTER(LEN=80)                            :: cf_in='coastal-stns-Vol-monthly.updated-Aug2014.nc4'
    CHARACTER(LEN=30), DIMENSION(:), ALLOCATABLE :: cname
 !------------------------------------------------------------------------
    ! Open file and read dimensions of data set

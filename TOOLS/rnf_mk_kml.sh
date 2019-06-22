@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/bash
 # This script build a kml file (suitable for google earth) with push-pins located at  Dai_Trenberth stations.
 
 
