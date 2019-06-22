@@ -17,7 +17,8 @@ F90=gfortran
 MPF90=
 #OMP=-fopenmp
 OMP=
-FFLAGS= -O  $(NCDF) $(NC4) $(CMIP6)  -fno-second-underscore -ffree-line-length-256 $(OMP)
+#FFLAGS= -O  $(NCDF) $(NC4) $(CMIP6)  -fno-second-underscore -ffree-line-length-256 $(OMP)
+FFLAGS= -O  -fcheck=bounds -g -fbacktrace -ffpe-trap='invalid','zero','overflow' $(NCDF) $(NC4) $(CMIP6)  -fno-second-underscore -ffree-line-length-256 $(OMP)
 LMPI=-lmpich
 
 INSTALL=$(WORKDIR)/bin
