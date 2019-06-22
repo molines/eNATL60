@@ -4,7 +4,7 @@ include make.macro
 
 ALL: bat_mask_old_zone.exe bat_mark_pool.exe \
      data_extend_zone.exe \
-     rnf_compute_runoff.exe rnf_compute_runoff36.exe rnf_reader.exe rnf_mask.exe rnf_merge.exe
+     rnf_compute_runoff.exe rnf_compute_runoff36.exe rnf_reader.exe rnf_mask.exe rnf_merge.exe rnf_12_36.exe
 
 bat_mask_old_zone.exe: bat_mask_old_zone.f90
 	$(F90) $(FFLAGS) bat_mask_old_zone.f90 -o  bat_mask_old_zone.exe
@@ -29,6 +29,9 @@ rnf_mask.exe: rnf_mask.f90
 
 rnf_merge.exe: rnf_merge.f90
 	$(F90) $(FFLAGS) rnf_merge.f90 -o  rnf_merge.exe
+
+rnf_12_36.exe: rnf_12_36.f90
+	$(F90) $(FFLAGS) rnf_12_36.f90 -o  rnf_12_36.exe
 
 clean:
 	\rm -f *~ *.exe
