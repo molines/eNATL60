@@ -41,6 +41,8 @@ PROGRAM rnf_12_36
      PRINT *,'      '
      PRINT *,'     PURPOSE :'
      PRINT *,'        Create a refined copy of FILE.12'
+     PRINT *,'        Each pixel of FILE.12 is splitted into 9 sub-pixel having'
+     PRINT *,'        The same value.'
      PRINT *,'      '
      PRINT *,'     ARGUMENTS :'
      PRINT *,'       -i FILE.12 : name for 1/12 file'
