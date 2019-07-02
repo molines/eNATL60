@@ -1,6 +1,6 @@
-PROGRAM rnf_compute_runoff
+PROGRAM rnf_compute_runoff36
   !!======================================================================
-  !!                     ***  PROGRAM  rnf_compute_runoff  ***
+  !!                     ***  PROGRAM  rnf_compute_runoff36  ***
   !!=====================================================================
   !!  ** Purpose : Compute monthly runoff file from Dai Trenberth data base
   !!
@@ -23,6 +23,7 @@ PROGRAM rnf_compute_runoff
   USE netcdf
   IMPLICIT NONE
   INTEGER :: js, jm
+  INTEGER :: narg, iargc, ijarg
   INTEGER :: npi, npj, np, ijs
   INTEGER :: ncid, id, ierr
   INTEGER :: npstn
@@ -46,6 +47,7 @@ PROGRAM rnf_compute_runoff
   CHARACTER(LEN=80) :: cv_gla = 'glamt'
   CHARACTER(LEN=80) :: cv_gph = 'gphit'
   CHARACTER(LEN=80) :: cv_rivmsk = 'Bathymetry'   !  Stupid BMGTOOLS requirement !
+  CHARACTER(LEN=80) :: cldum       
 
   ! Dai and trenberth structure
   TYPE river                  ! Data structure to reflect original data base
@@ -72,7 +74,46 @@ PROGRAM rnf_compute_runoff
   END TYPE river
 
   TYPE(river), DIMENSION(:), ALLOCATABLE :: runoff
+  LOGICAL            :: lchk = .false.
   !!----------------------------------------------------------------------
+  narg=iargc()
+  IF ( narg == 0 ) THEN
+     PRINT *, 'USAGE: rnf_compute_runoff36.exe go [-c HGR-file] [-r RIVERMASK-file] '
+     PRINT *, '     [-d DATA-runoff-file]'
+     PRINT *, ' '
+     PRINT *, '   PURPOSE:' 
+     PRINT *, '      Compute the runoff file (kg/m2/s) from the river-mask file and'
+     PRINT *, '      the Dai/Trenberth data base.'
+     PRINT *, ' '
+     PRINT *, '   ARGUMENTS:' 
+     PRINT *, '      go : if no options are used, any word as argument launch the program.'
+     PRINT *, ' '
+     PRINT *, '   OPTIONS:' 
+     PRINT *, '       [ -c HGR-file] : name of coordinates file for reading the horizontal metrics.'
+     PRINT *, '            default is : ',TRIM(cf_coo)
+     PRINT *, '       [ -r RIVERMASK-file] : name of the river mask-file'
+     PRINT *, '            default is : ',TRIM(cf_riv)
+     PRINT *, '       [ -d DATA-runoff-file] : name of Dai/Trenberth data file.' 
+     PRINT *, '            default is : ',TRIM(cf_in)
+     PRINT *, '    '
+     STOP
+  ENDIF
+
+  ijarg=1
+  DO WHILE (ijarg <= narg )
+     CALL getarg( ijarg, cldum) ; ijarg=ijarg+1
+     SELECT CASE (cldum)
+     CASE ( '-c' ) ; CALL getarg(ijarg,cf_coo) ; ijarg=ijarg+1
+     CASE ( '-r' ) ; CALL getarg(ijarg,cf_riv) ; ijarg=ijarg+1
+     CASE ( '-d' ) ; CALL getarg(ijarg,cf_in ) ; ijarg=ijarg+1
+     END SELECT
+  ENDDO
+
+  lchk=lchk .OR. chkfile(cf_coo)
+  lchk=lchk .OR. chkfile(cf_riv)
+  lchk=lchk .OR. chkfile(cf_in )
+  IF (lchk) STOP
+
   ! read e1t,  e2t in coordinates.nc
   ierr = NF90_OPEN(cf_coo, NF90_NOWRITE, ncid)
   ierr = NF90_INQ_DIMID(ncid, 'x', id ) ; ierr = NF90_INQUIRE_DIMENSION(ncid, id, len=npi)
@@ -222,6 +263,38 @@ PROGRAM rnf_compute_runoff
   ierr = NF90_CLOSE(ncid) 
 
 CONTAINS
+  LOGICAL FUNCTION chkfile (cd_file)
+    !!---------------------------------------------------------------------
+    !!                  ***  FUNCTION chkfile  ***
+    !!
+    !! ** Purpose :  Check if cd_file exists.
+    !!               Return false if it exists, true if it does not
+    !!               Do nothing is filename is 'none'
+    !!
+    !! ** Method  : Doing it this way allow statements such as
+    !!              IF ( chkfile( cf_toto) ) STOP 99  ! missing file
+    !!
+    !!----------------------------------------------------------------------
+    CHARACTER(LEN=*),  INTENT(in) :: cd_file
+
+    INTEGER(KIND=4)               :: ierr
+    LOGICAL                       :: ll_exist
+    !!----------------------------------------------------------------------
+    IF ( TRIM(cd_file) /= 'none')  THEN
+       INQUIRE (file = TRIM(cd_file), EXIST=ll_exist)
+
+       IF (ll_exist) THEN
+          chkfile = .false.
+       ELSE
+          PRINT *, ' File ',TRIM(cd_file),' is missing '
+          chkfile = .true.
+       ENDIF
+    ELSE
+       chkfile = .false.  ! 'none' file is not checked
+    ENDIF
+
+  END FUNCTION chkfile
+
   SUBROUTINE GetDaiTrenberth ( ) 
     INTEGER :: js, jt, jy, jmon
     INTEGER :: ijs, ij, iye, iyb, iy, ny
@@ -338,4 +411,4 @@ CONTAINS
     ENDDO
 
   END SUBROUTINE GetDaiTrenberth
-END PROGRAM rnf_compute_runoff
+END PROGRAM rnf_compute_runoff36
