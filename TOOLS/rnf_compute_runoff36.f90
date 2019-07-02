@@ -165,19 +165,32 @@ PROGRAM rnf_compute_runoff36
         ! compute runoff ( taking into account some particular case ( St Lawrence, Ottawa, Saguenay for instance)
         SELECT CASE ( ijs )
         CASE ( 1000 ) ! Amazon 
+        CASE ( 11)  ! Tocantin + Capim + Guama + Pacajas + Moju
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &  ! Tocantin
+                &    runoff(132)%vol_stn * runoff(132)%ratio_m2s + &   !  Capim
+                &    runoff(357)%vol_stn * runoff(357)%ratio_m2s + &   !  Guama
+                &    runoff(370)%vol_stn * runoff(370)%ratio_m2s + &   !  Pacajas
+                &    runoff(362)%vol_stn * runoff(362)%ratio_m2s       !  Moju
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + &  ! Tocantin
+                &            runoff(132)%monthly_flow(:) * runoff(132)%ratio_m2s + &   !  Capim
+                &            runoff(357)%monthly_flow(:) * runoff(357)%ratio_m2s + &   !  Guama
+                &            runoff(370)%monthly_flow(:) * runoff(370)%ratio_m2s + &   !  Pacajas
+                &            runoff(362)%monthly_flow(:) * runoff(362)%ratio_m2s       !  Moju
+           runoff( js)%ratio_m2s = 1.  
+
         CASE ( 16 ) !  ( St Lawrence, Ottawa, Saguenay Ottawa St Maurice Outardes Manicuagan )
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &
                 &    runoff( 59)%vol_stn * runoff( 59)%ratio_m2s + &   !  Ottawa
                 &    runoff(130)%vol_stn * runoff(130)%ratio_m2s + &   !  St Maurice
-                &    runoff( 66)%vol_stn * runoff( 66)%ratio_m2s + &   !  Saguenay
-                &    runoff(230)%vol_stn * runoff(230)%ratio_m2s + &   !  Outardes
-                &    runoff(101)%vol_stn * runoff(101)%ratio_m2s       !  Manicuagan
+                &    runoff( 66)%vol_stn * runoff( 66)%ratio_m2s    !  Saguenay
+!                &    runoff(230)%vol_stn * runoff(230)%ratio_m2s + &   !  Outardes
+!                &    runoff(101)%vol_stn * runoff(101)%ratio_m2s       !  Manicuagan
            runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + &
                 &            runoff( 59)%monthly_flow(:) * runoff( 59)%ratio_m2s + &   !  Ottawa
                 &            runoff(130)%monthly_flow(:) * runoff(130)%ratio_m2s + &   !  St Maurice
-                &            runoff( 66)%monthly_flow(:) * runoff( 66)%ratio_m2s + &   !  Saguenay
-                &            runoff(230)%monthly_flow(:) * runoff(230)%ratio_m2s + &   !  Outardes
-                &            runoff(101)%monthly_flow(:) * runoff(101)%ratio_m2s       !  Manicuagan
+                &            runoff( 66)%monthly_flow(:) * runoff( 66)%ratio_m2s !+ &   !  Saguenay
+!                &            runoff(230)%monthly_flow(:) * runoff(230)%ratio_m2s + &   !  Outardes
+!                &            runoff(101)%monthly_flow(:) * runoff(101)%ratio_m2s       !  Manicuagan
            runoff( js)%ratio_m2s = 1.  
         CASE ( 29 ) ! Esequibo Cuyuni
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Esequibo
@@ -185,13 +198,33 @@ PROGRAM rnf_compute_runoff36
            runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + &
                 &    runoff( 93)%monthly_flow(:) * runoff( 93)%ratio_m2s        !  Cuyuni
            runoff( js)%ratio_m2s = 1.
-        CASE ( 43 ) !  Usumasinta, Grivalva, Rapido de Sama
-           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Usumasinta (MX)
-                &    runoff(133)%vol_stn * runoff(133)%ratio_m2s            + & ! Rapido de Sama
-                &    runoff(201)%vol_stn * runoff(201)%ratio_m2s                ! Grivalva
-           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Usumasinta (MX)
-                &    runoff(133)%monthly_flow(:) * runoff(133)%ratio_m2s    +&  ! Rapido de Sama
-                &    runoff(201)%monthly_flow(:) * runoff(201)%ratio_m2s        ! Grivalva
+!        CASE ( 43 ) !  Usumasinta, Grivalva, Rapido de Sama
+!           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Usumasinta (MX)
+!                &    runoff(133)%vol_stn * runoff(133)%ratio_m2s            + & ! Rapido de Sama
+!                &    runoff(201)%vol_stn * runoff(201)%ratio_m2s                ! Grivalva
+!           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Usumasinta (MX)
+!                &    runoff(133)%monthly_flow(:) * runoff(133)%ratio_m2s    +&  ! Rapido de Sama
+!                &    runoff(201)%monthly_flow(:) * runoff(201)%ratio_m2s        ! Grivalva
+!           runoff( js)%ratio_m2s = 1.
+        CASE ( 45)  ! Rhin + Meuse + Vetch
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &  ! Rhin
+                &    runoff(247)%vol_stn * runoff(247)%ratio_m2s + &   !  Meuse
+                &    runoff(606)%vol_stn * runoff(606)%ratio_m2s       !  Vetch
+           runoff(js)%monthly_flow = runoff( js)%monthly_flow * runoff( js)%ratio_m2s + &  ! Rhin
+                &    runoff(247)%monthly_flow * runoff(247)%ratio_m2s + &   !  Meuse
+                &    runoff(606)%monthly_flow * runoff(606)%ratio_m2s       !  Vetch
+           runoff( js)%ratio_m2s = 1.  
+        CASE ( 47)  ! Caniapiscau + R. aux Melezes
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & !  Caniapiscau
+                &    runoff(146)%vol_stn * runoff(146)%ratio_m2s                ! R. aux Melezes
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Caniapiscau
+                &    runoff(146)%monthly_flow(:) * runoff(146)%ratio_m2s        ! R. aux Melezes
+           runoff( js)%ratio_m2s = 1.
+        CASE ( 56)  ! La grande + Sakami
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & !  La grande
+                &    runoff(315)%vol_stn * runoff(315)%ratio_m2s                ! Sakami
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! La grande
+                &    runoff(315)%monthly_flow(:) * runoff(315)%ratio_m2s        ! Sakami
            runoff( js)%ratio_m2s = 1.
         CASE ( 67)  !  Alabama + Tombigbee
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Alabama
@@ -199,17 +232,124 @@ PROGRAM rnf_compute_runoff36
            runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & !Alabama
                 &    runoff(123)%monthly_flow(:) * runoff(123)%ratio_m2s        ! Tombigbee
            runoff( js)%ratio_m2s = 1.
+        CASE ( 74)  ! Susquehanna + Potomac + Rappahannock + James
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &  ! Susquehanna
+                &    runoff(248)%vol_stn * runoff(248)%ratio_m2s + &   !  Potomac
+                &    runoff(530)%vol_stn * runoff(530)%ratio_m2s + &   !  Rappahannock
+                &    runoff(309)%vol_stn * runoff(309)%ratio_m2s       !  James
+           runoff(js)%monthly_flow = runoff( js)%monthly_flow * runoff( js)%ratio_m2s + &  ! Susquehanna
+                &    runoff(248)%monthly_flow * runoff(248)%ratio_m2s + &   !  Potomac
+                &    runoff(530)%monthly_flow * runoff(530)%ratio_m2s + &   !  Rappahannock
+                &    runoff(309)%monthly_flow * runoff(309)%ratio_m2s       !  James
+           runoff( js)%ratio_m2s = 1.  
+        CASE ( 84)  ! Nottaway + Harricana
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Nottaway
+                &    runoff(359)%vol_stn * runoff(359)%ratio_m2s                ! Harricana
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & !Nottaway
+                &    runoff(359)%monthly_flow(:) * runoff(359)%ratio_m2s        ! Harricana
+           runoff( js)%ratio_m2s = 1.
+        CASE ( 88)  ! Garonne + Vezere
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Garonne
+                &    runoff(493)%vol_stn * runoff(493)%ratio_m2s                ! Vezere
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Garonne
+                &    runoff(493)%monthly_flow(:) * runoff(493)%ratio_m2s        ! Vezere
+           runoff( js)%ratio_m2s = 1.
+        CASE (114)  ! Douro + Tamega
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Douro
+                &    runoff(463)%vol_stn * runoff(463)%ratio_m2s                ! Tamega
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Douro
+                &    runoff(463)%monthly_flow(:) * runoff(463)%ratio_m2s        ! Tamega
+           runoff( js)%ratio_m2s = 1.
+
+        CASE (116)  ! Kouilou +Niari
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Kouilou
+                &    runoff(235)%vol_stn * runoff(235)%ratio_m2s                ! Niari
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & !Kouilou
+                &    runoff(235)%monthly_flow(:) * runoff(235)%ratio_m2s        ! Niari
+           runoff( js)%ratio_m2s = 1.
+        CASE (132 ) ! Guama + Capim
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Guama
+                &    runoff(357)%vol_stn * runoff(357)%ratio_m2s                ! Capim
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & !Guama
+                &    runoff(357)%monthly_flow(:) * runoff(357)%ratio_m2s        ! Capim
+           runoff( js)%ratio_m2s = 1.
+        CASE (133)  ! Rompido de Sama + Grijalva
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Guama
+                &    runoff(201)%vol_stn * runoff(201)%ratio_m2s                ! Capim
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & !Guama
+                &    runoff(201)%monthly_flow(:) * runoff(201)%ratio_m2s        ! Capim
+           runoff( js)%ratio_m2s = 1.
+        CASE (137)  !  Glomma + Dramselv
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Glomma
+                &    runoff(256)%vol_stn * runoff(256)%ratio_m2s                ! Dramselv
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Glomma
+                &    runoff(256)%monthly_flow(:) * runoff(256)%ratio_m2s        ! Dramselv
+           runoff( js)%ratio_m2s = 1.
+        CASE (141)  ! Daugava + Lielupe + Aiviekste
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &  ! Daugava
+                &    runoff(500)%vol_stn * runoff(500)%ratio_m2s + &   !  Lielupe
+                &    runoff(540)%vol_stn * runoff(540)%ratio_m2s       !  Aiviekste
+           runoff(js)%monthly_flow = runoff( js)%monthly_flow * runoff( js)%ratio_m2s + &  ! Daugava
+                &    runoff(500)%monthly_flow * runoff(500)%ratio_m2s + &   !  Lielupe
+                &    runoff(540)%monthly_flow * runoff(540)%ratio_m2s       !  Aiviekste
+           runoff( js)%ratio_m2s = 1.  
+        CASE (170)  ! Itapecuru + Munim
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Itapecuru
+                &    runoff(374)%vol_stn * runoff(374)%ratio_m2s                ! Munim
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Itapecuru
+                &    runoff(374)%monthly_flow(:) * runoff(374)%ratio_m2s        ! Munim
+           runoff( js)%ratio_m2s = 1.
+        CASE (179)  ! Brazos + Trinity
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Brazos
+                &    runoff(295)%vol_stn * runoff(295)%ratio_m2s                ! Trinity
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Brazos
+                &    runoff(295)%monthly_flow(:) * runoff(295)%ratio_m2s        ! Trinity
+           runoff( js)%ratio_m2s = 1.
+        CASE (181)  ! Jaguaribe + Bababuiu
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Jaguaribe
+                &    runoff(520)%vol_stn * runoff(520)%ratio_m2s                ! Bababuiu
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Jaguaribe
+                &    runoff(520)%monthly_flow(:) * runoff(520)%ratio_m2s        ! Bababuiu
+           runoff( js)%ratio_m2s = 1.
+        CASE (227)  ! Hvita + Bruara
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Hvita
+                &    runoff(583)%vol_stn * runoff(583)%ratio_m2s                ! Bruara
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Hvita
+                &    runoff(583)%monthly_flow(:) * runoff(583)%ratio_m2s        ! Bruara
+           runoff( js)%ratio_m2s = 1.
         CASE (288)  ! Sabines + Noches
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Sabines
                 &    runoff(317)%vol_stn * runoff(317)%ratio_m2s                ! Noches
            runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Sabines
                 &    runoff(317)%monthly_flow(:) * runoff(317)%ratio_m2s        ! Noches
            runoff( js)%ratio_m2s = 1.
-        CASE (432 ) ! Ouergha + Sehou
+        CASE (306)  !Pindare + Mearim + Grajau + Turiacu
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Pindare
+                &    runoff(395)%vol_stn * runoff(395)%ratio_m2s            + & ! Mearim
+                &    runoff(397)%vol_stn * runoff(397)%ratio_m2s            + & ! Grajau
+                &    runoff(445)%vol_stn * runoff(445)%ratio_m2s                ! Turiacu
+           runoff(js)%monthly_flow = runoff( js)%monthly_flow * runoff( js)%ratio_m2s + & ! Pindare
+                &    runoff(395)%monthly_flow * runoff(395)%ratio_m2s        + & ! Mearim
+                &    runoff(397)%monthly_flow * runoff(397)%ratio_m2s        + & ! Grajau
+                &    runoff(445)%monthly_flow * runoff(445)%ratio_m2s            ! Turiacu
+           runoff( js)%ratio_m2s = 1.
+        CASE (417)  ! Nidelv + Gaula
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Nidelv
+                &    runoff(462)%vol_stn * runoff(462)%ratio_m2s                ! Gaula
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Nidelv
+                &    runoff(462)%monthly_flow(:) * runoff(462)%ratio_m2s        ! Gaula
+           runoff( js)%ratio_m2s = 1.
+        CASE (423 ) ! Ouergha + Sehou
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Ouergah
                 &    runoff(498)%vol_stn * runoff(498)%ratio_m2s                ! Sehou
            runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Ouergha
                 &    runoff(498)%monthly_flow(:) * runoff(498)%ratio_m2s        ! Sehou
+           runoff( js)%ratio_m2s = 1.
+        CASE (458) ! Wye + severn
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Wye
+                &    runoff(486)%vol_stn * runoff(486)%ratio_m2s                ! Severn
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Wye
+                &    runoff(486)%monthly_flow(:) * runoff(486)%ratio_m2s        ! Severn
            runoff( js)%ratio_m2s = 1.
         END SELECT
 !        PRINT *, js, np , darea/1.e6, 'km^2', runoff(js)%vol_stn * runoff(js)%ratio_m2s/darea * dconvcoef*dconv2mm, TRIM(runoff(js)%riv_name), SUM(runoff(js)%monthly_flow(:))/12.*runoff(js)%ratio_m2s/darea*1000.*86400. ! mm/day
