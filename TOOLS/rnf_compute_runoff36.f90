@@ -206,6 +206,12 @@ PROGRAM rnf_compute_runoff36
 !                &    runoff(133)%monthly_flow(:) * runoff(133)%ratio_m2s    +&  ! Rapido de Sama
 !                &    runoff(201)%monthly_flow(:) * runoff(201)%ratio_m2s        ! Grivalva
 !           runoff( js)%ratio_m2s = 1.
+        CASE ( 32 ) ! Nelson + Hayes
+           runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + & ! Nelson
+                &    runoff(142)%vol_stn * runoff(142)%ratio_m2s                ! Hayes
+           runoff(js)%monthly_flow(:) = runoff( js)%monthly_flow(:) * runoff( js)%ratio_m2s + & ! Nelson
+                &    runoff(142)%monthly_flow(:) * runoff(142)%ratio_m2s        ! Hayes
+           runoff( js)%ratio_m2s = 1.
         CASE ( 45)  ! Rhin + Meuse + Vetch
            runoff(js)%vol_stn = runoff( js)%vol_stn * runoff( js)%ratio_m2s + &  ! Rhin
                 &    runoff(247)%vol_stn * runoff(247)%ratio_m2s + &   !  Meuse
