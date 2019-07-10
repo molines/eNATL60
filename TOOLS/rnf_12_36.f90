@@ -23,7 +23,7 @@ PROGRAM rnf_12_36
   INTEGER :: npiglo12, npjglo12, nx12, ny12, npt12
   INTEGER :: npiglo36, npjglo36, nx36, ny36
   INTEGER :: ncid12, id, ierr
-  INTEGER :: ncid36, idx, idy, idt, id36
+  INTEGER :: ncid36, idx, idy, idt, id36, idcof
   INTEGER :: narg, ijarg
 
   REAL(KIND=4), DIMENSION(:,:), ALLOCATABLE :: rdata12  ! on eDomain12
@@ -86,6 +86,7 @@ PROGRAM rnf_12_36
   ierr = NF90_DEF_DIM(ncid36,'time_counter',NF90_UNLIMITED,idt)
 
   ierr = NF90_DEF_VAR(ncid36,'runoff',NF90_FLOAT,(/idx,idy,idt/), id36)
+  ierr = NF90_DEF_VAR(ncid36,'socoefr',NF90_FLOAT,(/idx,idy/), idcof)
 
   ! allocate bathy and mask array
   ALLOCATE ( rdata12(npiglo12, npjglo12))
@@ -102,6 +103,17 @@ PROGRAM rnf_12_36
   ENDDO
   ierr = NF90_PUT_VAR(ncid36,id36,rdata36,start=(/1,1,jt/), count=(/npiglo36,npjglo36,1/) )
   ENDDO
+  ierr = NF90_INQ_VARID(ncid12,'socoefr',id)
+  ierr = NF90_GET_VAR(ncid12,id,rdata12,start=(/1,1/), count=(/npiglo12,npjglo12/))
+
+  DO jj=1,npjglo12
+    DO ji=1,npiglo12
+       ii36=(ji-1)*3+2
+       ij36=(jj-1)*3+2
+       rdata36(ii36-1:ii36+1,ij36-1:ij36+1) = rdata12(ji,jj)
+    ENDDO
+  ENDDO
+  ierr = NF90_PUT_VAR(ncid36,idcof,rdata36,start=(/1,1/), count=(/npiglo36,npjglo36/) )
   ierr = NF90_CLOSE(ncid12)
   ierr = NF90_CLOSE(ncid36)
   
